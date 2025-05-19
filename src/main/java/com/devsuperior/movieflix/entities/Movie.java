@@ -1,29 +1,22 @@
 package com.devsuperior.movieflix.entities;
 
+import com.devsuperior.movieflix.projections.IdProjection;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
 @Entity
 @Table(name = "tb_movie")
-public class Movie {
+public class Movie implements IdProjection<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String subTitle;
-    
+
     @Column(name = "movie_year")
     private Integer year;
     private String imgUrl;
@@ -38,7 +31,7 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     private List<Review> reviews = new ArrayList<>();
 
-    public Movie(){
+    public Movie() {
 
     }
 
